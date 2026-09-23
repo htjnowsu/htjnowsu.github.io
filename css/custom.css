@@ -1,264 +1,41 @@
-/* 首页只保留首屏 */
-#page-header.full_page {
-  height: 100vh;
+/* 日耀甜果 · Hexo / Butterfly 自定义样式
+   按页面分区；修改间距、颜色时先看这里的变量。 */
+:root {
+  --paper-image: url("/img/paper-texture.jpg");
+  --ink: #6b4b36;
+  --about-gap: 0px;
+  /* 植物原图左右有留白，归档菜单需向植物的图片盒子内靠近。 */
+  --archive-menu-overlap: 80px;
 }
 
-/* 隐藏首页下面的文章和侧边栏 */
-#page-header.full_page + #content-inner {
-  display: none;
-}
-
-/* 隐藏首页页脚 */
-#page-header.full_page ~ #footer {
-  display: none;
-}
-
-/* 隐藏首页向下箭头 */
-#page-header.full_page #scroll-down {
-  display: none;
-}
-/* 隐藏右下角按钮：齿轮 + 返回顶部箭头 */
+/* 全站：隐藏右下角的齿轮和返回顶部按钮 */
 #rightside {
   display: none !important;
 }
-/* 归档入口页 */
-.archive-menu {
-  min-height: 70vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 28px;
+
+/* 纸张背景：归档入口、列表、友链、关于、文章 */
+body:has(.archive-menu-wrap),
+body:has(#category),
+body:has(#archive),
+body:has(.simple-paper-page),
+body:has(#post) {
+  background: var(--paper-image) center / cover fixed !important;
 }
 
-.archive-menu a {
-  font-size: 22px;
-  color: #333;
-  text-decoration: none;
-}
-
-.archive-menu a:hover {
-  opacity: 0.55;
-}
-/* ========================================
-   归档入口页
-   ======================================== */
-
-body:has(.archive-menu-wrap) {
-  background:
-    url("/img/paper-texture.jpg")
-    center / cover fixed !important;
-}
-
-
-
-/* 整页取消 Butterfly 默认布局 */
-body:has(.archive-menu-wrap) #content-inner {
-  max-width: none !important;
-  padding: 0 !important;
-}
-
-body:has(.archive-menu-wrap) #page {
-  margin: 0 !important;
-  padding: 0 !important;
-  width: 100% !important;
-  background: transparent !important;
-  box-shadow: none !important;
-}
-
-/* 植物 + 四个菜单 */
-.archive-menu-wrap {
-  min-height: calc(100vh - 60px);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 35px;
-}
-
-
-/* 植物 */
-.archive-branch {
-  height: 520px;
-  width: auto;
-  max-height: 68vh;
-  opacity: 0.75;
-
-  
-  /* 植物图片不阻挡鼠标点击 */
-  pointer-events: none;
-    /* 植物往左边，往下移动 */
-  transform: translate(-25px, 40px);
-}
-
-
-/* 四个菜单 */
-.archive-menu {
-  display: flex;
-  flex-direction: column;
-  gap: 22px;
-
-  /* 只移动文字，不影响植物位置 */
-  transform: translateX(-140px);
-
-  position: relative;
-  z-index: 2;
-}
-
-/* 菜单文字 */
-.archive-menu a {
-  color: #6b4b36 !important;
-  font-size: 30px;
-  font-family: serif;
-  line-height: 1.2;
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 5px;
-
-  transition: opacity 0.25s ease;
-}
-
-.archive-menu a:hover {
-  opacity: 0.5;
-}
-
-/* 不显示 footer */
-body:has(.archive-menu-wrap) #footer {
+/* 这些页面不显示页脚；列表、简单页面和文章不显示侧栏 */
+body:has(.archive-menu-wrap) #footer,
+body:has(#category) #footer,
+body:has(#archive) #footer,
+body:has(.simple-paper-page) #footer,
+body:has(#post) #footer,
+body:has(#category) #aside-content,
+body:has(#archive) #aside-content,
+body:has(.simple-paper-page) #aside-content,
+body:has(#post) #aside-content {
   display: none !important;
 }
 
-/* ========================================
-   生活 / 游戏 / 书影 分类文章页
-   ======================================== */
-
-body:has(#category) {
-  background:
-    url("/img/paper-texture.jpg")
-    center / cover fixed !important;
-}
-
-/* 顶部区域 */
-body:has(#category) #page-header {
-  height: 150px !important;
-  background: transparent !important;
-  background-image: none !important;
-}
-
-
-
-/* “生活 / 游戏 / 书影”标题 */
-
-
-/* 整体内容 */
-body:has(#category) #content-inner {
-  max-width: 650px !important;
-  padding: 30px 0 0 !important;
-}
-
-/* 去掉 Butterfly 卡片 */
-body:has(#category) #category {
-  position: relative;
-
-  min-height: 500px;
-
-  padding: 20px 240px 20px 0 !important;
-
-  background: transparent !important;
-  box-shadow: none !important;
-  border-radius: 0 !important;
-}
-
-/* 右边植物 */
-body:has(#category) #category::after {
-  content: "";
-
-  position: absolute;
-  top: -65px;
-  right: -50px;
-
-  width: 360px;
-  height: 580px;
-
-  background:
-    url("/img/archive-branch.png")
-    center / contain no-repeat;
-
-  opacity: 0.7;
-}
-
-/* 隐藏“分类 - 生活” */
-body:has(#category) .article-sort-title {
-  display: none !important;
-}
-
-/* 去掉默认时间线 */
-body:has(#category) .article-sort {
-  margin: 0 !important;
-  padding: 0 !important;
-  border: none !important;
-}
-
-body:has(#category) .article-sort::before,
-body:has(#category) .article-sort-item::before {
-  display: none !important;
-}
-
-/* 年份 */
-body:has(#category) .article-sort-item.year {
-  margin: 0 0 25px !important;
-  padding: 0 !important;
-
-  color: #6b4b36;
-  font-family: serif;
-  font-size: 28px !important;
-  font-weight: normal;
-}
-
-/* 每篇文章 */
-body:has(#category) .article-sort-item {
-  margin: 0 0 18px !important;
-  padding: 0 !important;
-  border: none !important;
-}
-
-/* 不显示日期 */
-body:has(#category) .article-sort-item-time {
-  display: none !important;
-}
-
-/* 文章标题 */
-body:has(#category) .article-sort-item-title {
-  color: #6b4b36 !important;
-  font-family: serif;
-  font-size: 25px !important;
-  font-weight: normal !important;
-
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 5px;
-}
-
-/* 每篇标题前加 │ */
-body:has(#category)
-.article-sort-item:not(.year)
-.article-sort-item-title::before {
-  content: "│ ";
-}
-
-/* 不显示侧栏 */
-body:has(#category) #aside-content {
-  display: none !important;
-}
-
-/* 不显示 footer */
-body:has(#category) #footer {
-  display: none !important;
-}
-
-/* ========================================
-   非首页统一顶部导航
-   ======================================== */
-
-/* 非首页顶部只保留导航 */
+/* 除首页外，顶部只显示 60px 导航 */
 body:not(:has(#page-header.full_page)) #page-header {
   display: block !important;
   height: 60px !important;
@@ -267,219 +44,251 @@ body:not(:has(#page-header.full_page)) #page-header {
   box-shadow: none !important;
 }
 
-/* 去掉 Butterfly 顶部遮罩 */
-body:not(:has(#page-header.full_page)) #page-header::before {
-  display: none !important;
-}
-
-/* 不显示页面大标题 */
+body:not(:has(#page-header.full_page)) #page-header::before,
 body:not(:has(#page-header.full_page)) #page-site-info {
   display: none !important;
 }
 
-/* 保留导航 */
 body:not(:has(#page-header.full_page)) #nav {
   display: flex !important;
   background: transparent !important;
 }
 
-/* 导航文字颜色 */
 body:not(:has(#page-header.full_page)) #nav a,
 body:not(:has(#page-header.full_page)) #blog_name a {
-  color: #6b4b36 !important;
+  color: var(--ink) !important;
   text-shadow: none !important;
 }
 
-/* ========================================
-   首页：纸张背景 + 咖啡厅图片 + 延迟标题
-   ======================================== */
-
-/* 首页底层：纸张纹理 */
+/* ========== 首页 ========== */
 #page-header.full_page {
   position: relative;
   height: 100vh !important;
-
-  background:
-    url("/img/paper-texture.jpg")
-    center / cover fixed !important;
-
+  background: var(--paper-image) center / cover fixed !important;
   overflow: hidden;
 }
 
-/* 去掉 Butterfly 原来的黑色遮罩 */
+#page-header.full_page + #content-inner,
+#page-header.full_page ~ #footer,
+#page-header.full_page #scroll-down {
+  display: none;
+}
+
 #page-header.full_page::before {
   background: transparent !important;
 }
 
-/* 首页中央区域 */
+/* 原来的咖啡厅照片和中央站名由新拼贴代替；顶部导航仍保留。 */
 #page-header.full_page #site-info {
+  display: none !important;
+}
+
+/* 首页拼贴：以参考图 1494 × 827 为比例，整体缩放。 */
+#page-header.full_page .home-collage {
   position: absolute;
+  top: 50%;
   left: 50%;
-  top: 50%;
-
-  width: 100%;
-  overflow: visible;
-
+  width: min(100vw, 180.65vh);
+  aspect-ratio: 1494 / 827;
   transform: translate(-50%, -50%);
-
   z-index: 2;
-}
-
-/* 咖啡厅照片 */
-#page-header.full_page #site-info::before {
-  content: "";
-
-  position: absolute;
-  left: 60%;
-  top: 50%;
-
-  width: min(50vw, 650px);
-  height: min(48vh, 420px);
-
-  background:
-    url("/img/home-banner.jpg")
-    center / cover no-repeat;
-
-  opacity: 0;
-
-  transform:
-    translate(-50%, -50%)
-    scale(0.82);
-
-  animation:
-    homePhotoIn 1.8s ease-out 0.15s forwards;
-
-  z-index: 0;
-
   pointer-events: none;
+  isolation: isolate;
 }
 
-/* 日耀甜果：后出现 */
-#page-header.full_page #site-title {
-  position: relative;
-
-  z-index: 1;
-  
-  left: -200px;
-  top: 0px;
-  
-
+#page-header.full_page .home-collage img {
+  position: absolute;
+  display: block;
+  height: auto;
+  max-width: none;
   opacity: 0;
-
-  transform: scale(0.88);
-
-  animation:
-    homeTitleIn 1.3s ease-out 1.35s forwards !important;
+  animation: homeLayerIn 1.75s ease-out var(--enter, 0s) forwards;
 }
 
-/* 首页导航放最上层 */
+/* 保留书法原图的纸纹与颜色，只裁去上下多余空白。 */
+#page-header.full_page .home-collage .home-poem {
+  left: 22.1%;
+  top: 0;
+  width: 46.3%;
+  z-index: 2;
+  clip-path: inset(10% 0 23% 0);
+}
+
+#page-header.full_page .home-collage .home-paper {
+  left: 58%;
+  top: 33%;
+  width: 21%;
+  height: 50%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+#page-header.full_page .home-collage .home-book {
+  left: 6%;
+  top: 69%;
+  width: 20%;
+  z-index: 4;
+}
+
+#page-header.full_page .home-collage .home-book-quote {
+  left: 14.5%;
+  top: 66%;
+  width: 12.2%;
+  z-index: 5;
+}
+
+#page-header.full_page .home-collage .home-upper-quote {
+  left: 61%;
+  top: 26.5%;
+  width: 12.2%;
+  z-index: 5;
+}
+
+#page-header.full_page .home-collage .home-portrait {
+  left: 68.3%;
+  top: 12%;
+  width: 18.4%;
+  z-index: 4;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 20% 100%, 20% 57%, 0 57%);
+}
+
+#page-header.full_page .home-collage .home-branch {
+  left: 57%;
+  top: 45%;
+  width: 25%;
+  z-index: 3;
+}
+
+#page-header.full_page .home-collage .home-sticker {
+  left: 69%;
+  top: 75%;
+  width: 23%;
+  z-index: 6;
+}
+
 #page-header.full_page #nav {
   position: relative;
   z-index: 5;
 }
 
-/* 因为现在背景是白纸，所以顶部文字改深色 */
 #page-header.full_page #nav a,
 #page-header.full_page #blog_name a {
-  color: #6b4b36 !important;
+  color: var(--ink) !important;
   text-shadow: none !important;
 }
 
+@keyframes homeLayerIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
 
-/* 咖啡厅图片：先淡入并缓慢放大 */
-@keyframes homePhotoIn {
-  from {
-    opacity: 0;
-    transform:
-      translate(-50%, -50%)
-      scale(0.82);
+/* 窄屏重新排布素材，避免桌面拼贴缩成一小块。 */
+@media (max-width: 700px) {
+  #page-header.full_page .home-collage {
+    top: calc(50% + 30px);
+    width: 100vw;
+    height: calc(100vh - 60px);
+    aspect-ratio: auto;
   }
 
-  to {
+  #page-header.full_page .home-collage .home-poem {
+    left: 3%; top: 1%; width: 94%;
+  }
+  #page-header.full_page .home-collage .home-paper {
+    left: 50%; top: 51%; width: 43%; height: 27%;
+  }
+  #page-header.full_page .home-collage .home-book {
+    left: 4%; top: 76%; width: 42%;
+  }
+  #page-header.full_page .home-collage .home-book-quote {
+    left: 23%; top: 72%; width: 30%;
+  }
+  #page-header.full_page .home-collage .home-upper-quote {
+    left: 49%; top: 53%; width: 25%;
+  }
+  #page-header.full_page .home-collage .home-portrait {
+    left: 69%; top: 47%; width: 28%;
+  }
+  #page-header.full_page .home-collage .home-branch {
+    left: 48%; top: 60%; width: 33%;
+  }
+  #page-header.full_page .home-collage .home-sticker {
+    left: 61%; top: 82%; width: 34%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #page-header.full_page .home-collage img {
+    animation: none;
     opacity: 1;
-    transform:
-      translate(-50%, -50%)
-      scale(1);
   }
 }
 
-
-/* 日耀甜果：稍后淡入并放大 */
-@keyframes homeTitleIn {
-  from {
-    opacity: 0;
-    transform: scale(0.88);
-  }
-
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+/* ========== 归档入口：植物 + 四个菜单 ========== */
+body:has(.archive-menu-wrap) #content-inner {
+  max-width: none !important;
+  padding: 0 !important;
 }
 
-/* 首页中央标题分色 */
-#page-header.full_page #site-title {
-  font-size: 0 !important;
-}
-
-/* 日耀甜：棕色 */
-#page-header.full_page #site-title::before {
-  content: "日耀甜";
-  color: #6b4b36;
-  font-size: 42px;
-  font-weight: bold;
-}
-
-/* 果：保持白色 */
-#page-header.full_page #site-title::after {
-  content: "果";
-  color: #fff;
-  font-size: 42px;
-  font-weight: bold;
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
-}
-
-/* ========================================
-   “所有”总归档页：与生活/游戏/书影保持一致
-   ======================================== */
-
-/* 纸张纹理背景 */
-body:has(#archive) {
-  background:
-    url("/img/paper-texture.jpg")
-    center / cover fixed !important;
-}
-
-/* 顶部只保留导航 */
-body:has(#archive) #page-header {
-  height: 60px !important;
+body:has(.archive-menu-wrap) #page {
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
   background: transparent !important;
-  background-image: none !important;
   box-shadow: none !important;
 }
 
-body:has(#archive) #page-header::before {
-  display: none !important;
+.archive-menu-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
+  width: fit-content;
+  min-height: calc(100vh - 60px);
+  margin: 0 auto;
+  gap: 0;
+  transform: translateX(-100px);
 }
 
-body:has(#archive) #page-site-info {
-  display: none !important;
+.archive-branch {
+  flex: 0 0 auto;
+  width: auto;
+  height: 520px;
+  max-height: none;
+  opacity: 0.75;
+  pointer-events: none;
+  transform: translateY(40px);
 }
 
-/* 顶部导航颜色 */
-body:has(#archive) #nav a,
-body:has(#archive) #blog_name a {
-  color: #6b4b36 !important;
-  text-shadow: none !important;
+.archive-menu {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  margin-left: calc(-1 * var(--archive-menu-overlap));
 }
 
-/* 隐藏右侧栏 */
-body:has(#archive) #aside-content {
-  display: none !important;
+.archive-menu a {
+  color: var(--ink) !important;
+  font-family: serif;
+  font-size: 30px;
+  line-height: 1.2;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 5px;
+  transition: opacity 0.25s ease;
 }
 
-/* 内容区域 */
-body:has(#archive) #content-inner {
+.archive-menu a:hover {
+  opacity: 0.5;
+}
+
+/* ========== 分类列表 / “所有”总归档 ========== */
+body:has(:is(#category, #archive)) #content-inner {
   max-width: 650px !important;
   padding: 30px 0 0 !important;
 }
@@ -488,138 +297,59 @@ body:has(#archive) .layout > div:first-child {
   width: 100% !important;
 }
 
-/* 去掉 Butterfly 默认白框 */
-body:has(#archive) #archive {
+body:has(:is(#category, #archive)) :is(#category, #archive) {
   position: relative;
-
   min-height: 500px;
-
-  /* 右边给植物留位置 */
   padding: 20px 240px 20px 0 !important;
-
   background: transparent !important;
   box-shadow: none !important;
   border-radius: 0 !important;
 }
 
-/* 右边植物 */
-body:has(#archive) #archive::after {
-  content: "";
-
-  position: absolute;
-  top: 65px;
-  right: 10px;
-
-  width: 320px;
-  height: 520px;
-
-  background:
-    url("/img/archive-branch.png")
-    center / contain no-repeat;
-
-  opacity: 0.7;
-  pointer-events: none;
-}
-
-/* 去掉“全部文章 - 4” */
-body:has(#archive) .article-sort-title {
+/* 列表的植物原来最终被隐藏，因此不生成伪元素。 */
+body:has(:is(#category, #archive)) .article-sort-title,
+body:has(:is(#category, #archive)) .article-sort-item-time,
+body:has(:is(#category, #archive)) .article-sort::before,
+body:has(:is(#category, #archive)) .article-sort-item::before {
   display: none !important;
 }
 
-/* 去掉默认时间轴 */
-body:has(#archive) .article-sort {
+body:has(:is(#category, #archive)) .article-sort {
   margin: 0 !important;
   padding: 0 !important;
   border: none !important;
 }
 
-body:has(#archive) .article-sort::before,
-body:has(#archive) .article-sort-item::before {
-  display: none !important;
-}
-
-/* 年份 */
-body:has(#archive) .article-sort-item.year {
-  margin: 0 0 25px !important;
-  padding: 0 !important;
-
-  color: #6b4b36;
-  font-family: serif;
-  font-size: 28px !important;
-  font-weight: normal !important;
-}
-
-/* 每篇文章 */
-body:has(#archive) .article-sort-item {
+body:has(:is(#category, #archive)) .article-sort-item {
   margin: 0 0 18px !important;
   padding: 0 !important;
   border: none !important;
 }
 
-/* 不显示日期 */
-body:has(#archive) .article-sort-item-time {
-  display: none !important;
+body:has(:is(#category, #archive)) .article-sort-item.year {
+  margin: 0 0 25px !important;
+  color: var(--ink);
+  font-family: serif;
+  font-size: 28px !important;
+  font-weight: normal !important;
 }
 
-/* 文章标题 */
-body:has(#archive) .article-sort-item-title {
-  color: #6b4b36 !important;
+body:has(:is(#category, #archive)) .article-sort-item-title {
+  color: var(--ink) !important;
   font-family: serif;
   font-size: 25px !important;
   font-weight: normal !important;
-
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 5px;
 }
 
-/* 标题前面的竖线 */
-body:has(#archive)
-.article-sort-item:not(.year)
-.article-sort-item-title::before {
+body:has(:is(#category, #archive))
+  .article-sort-item:not(.year) .article-sort-item-title::before {
   content: "│ ";
 }
 
-/* 去掉 footer */
-body:has(#archive) #footer {
-  display: none !important;
-}
-
-/* 生活 / 游戏 / 书影 / 所有：植物统一位置和大小 */
-body:has(#category) #category::after,
-body:has(#archive) #archive::after {
-  content: "";
-
-  position: absolute;
-  top: -65px;
-
-  /* 从左边统一定位 */
-  left: 130px;
-  right: 100px;
-
-  width: 360px;
-  height: 580px;
-
-  background:
-    url("/img/archive-branch.png")
-    center / contain no-repeat;
-
-  opacity: 0.7;
-  pointer-events: none;
-}
-
-/* ========================================
-   友链 / 关于页面
-   ======================================== */
-
-/* 纸张纹理背景 */
-body:has(.simple-paper-page) {
-  background:
-    url("/img/paper-texture.jpg")
-    center / cover fixed !important;
-}
-
-/* 取消 Butterfly 默认内容宽度 */
+/* ========== 友链 / 关于 ========== */
 body:has(.simple-paper-page) #content-inner {
   max-width: none !important;
   padding: 0 !important;
@@ -629,108 +359,74 @@ body:has(.simple-paper-page) .layout > div:first-child {
   width: 100% !important;
 }
 
-/* 去掉默认白色卡片 */
 body:has(.simple-paper-page) #page {
   width: 100% !important;
   margin: 0 !important;
   padding: 0 !important;
-
   background: transparent !important;
   box-shadow: none !important;
   border-radius: 0 !important;
 }
 
-/* 页面主体 */
 .simple-paper-page {
-  min-height: calc(100vh - 60px);
-
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 60px);
 }
 
-/* 植物 */
+/* 友链等简单页面：保留原本植物的位置。关于页在下面单独设置。 */
 .simple-page-branch {
   width: auto;
   height: 520px;
   max-height: 68vh;
-
   opacity: 0.75;
   pointer-events: none;
-
-  /* 第一个数控制左右，第二个数控制上下 */
   transform: translate(-225px, 40px);
 }
 
-/* 隐藏侧栏和页脚 */
-body:has(.simple-paper-page) #aside-content,
-body:has(.simple-paper-page) #footer {
-  display: none !important;
-}
-
-/* 隐藏生活、游戏、书影、所有页面的植物 */
-body:has(#category) #category::after,
-body:has(#archive) #archive::after {
-  display: none !important;
-}
-
-/* 关于页面：固定植物与文字的位置关系 */
-.about-page {
+/* 关于页和友链页：植物与文字使用相同的排版 */
+.about-page,
+.link-page {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   flex-wrap: nowrap;
-  gap: 0;
+  width: fit-content;
+  margin: 0 auto;
+  gap: var(--about-gap);
 }
 
-/* 关于页面的植物：禁止自动缩放或挤压 */
-.about-page .simple-page-branch {
+.about-page .simple-page-branch,
+.link-page .simple-page-branch {
   flex: 0 0 auto;
-  flex-shrink: 0;
-
   height: 520px;
-  width: auto;
   max-height: none;
+  transform: translateY(40px);
 }
 
-/* 关于页面文字 */
-.about-text {
+.about-text,
+.link-intro {
   flex: 0 0 490px;
   width: 490px;
-  flex-shrink: 0;
-
-  margin-left: -500px;
-
-  color: #6b4b36;
+  margin: 0;
+  color: var(--ink);
   font-family: serif;
   font-size: 22px;
   line-height: 2;
-
-  transform: translate(-200px, 40px);
+  transform: translateY(40px);
 }
 
-/* 每段文字的间距 */
+.about-text p,
+.link-intro p {
+  margin: 0 0 18px;
+}
+
 .about-text p {
   margin: 0 0 18px;
 }
 
-/* ========================================
-   文章正文页面
-   ======================================== */
-
-/* 纸张纹理背景 */
-body:has(#post) {
-  background:
-    url("/img/paper-texture.jpg")
-    center / cover fixed !important;
-}
-
-/* 隐藏右侧栏 */
-body:has(#post) #aside-content {
-  display: none !important;
-}
-
-/* 正文整体宽度和位置 */
+/* ========== 文章正文 ========== */
 body:has(#post) #content-inner {
   max-width: 760px !important;
   padding: 70px 30px 50px !important;
@@ -740,34 +436,29 @@ body:has(#post) .layout > div:first-child {
   width: 100% !important;
 }
 
-/* 去掉文章外面的白色卡片 */
 body:has(#post) #post {
   margin: 0 !important;
   padding: 0 !important;
-
   background: transparent !important;
   box-shadow: none !important;
   border-radius: 0 !important;
 }
 
-/* 文章正文 */
 body:has(#post) #article-container {
-  color: #6b4b36;
+  color: var(--ink);
   font-family: serif;
   font-size: 18px;
   line-height: 2;
 }
 
-/* 正文中的标题、链接也使用棕色 */
 body:has(#post) #article-container h1,
 body:has(#post) #article-container h2,
 body:has(#post) #article-container h3,
 body:has(#post) #article-container h4,
 body:has(#post) #article-container a {
-  color: #6b4b36 !important;
+  color: var(--ink) !important;
 }
 
-/* 隐藏正文之外的附加内容 */
 body:has(#post) .post-copyright,
 body:has(#post) .tag_share,
 body:has(#post) .post-reward,
@@ -777,34 +468,22 @@ body:has(#post) #post-comment {
   display: none !important;
 }
 
-/* 隐藏页脚 */
-body:has(#post) #footer {
-  display: none !important;
-}
-
-/* ========================================
-   文章底部：上一篇 / 下一篇
-   ======================================== */
-
+/* 文章底部：上一篇 / 下一篇 */
 body:has(#post) .pagination-post {
   margin-top: 70px !important;
-
   background: transparent !important;
   box-shadow: none !important;
 }
 
-/* 左右两篇文章 */
 body:has(#post) .pagination-post .prev-post,
 body:has(#post) .pagination-post .next-post {
   background: transparent !important;
 }
 
-/* 隐藏默认封面图片 */
 body:has(#post) .pagination-post img {
   display: none !important;
 }
 
-/* 文章标题 */
 body:has(#post) .pagination-post .prev_info,
 body:has(#post) .pagination-post .next_info {
   font-size: 18px;
@@ -812,7 +491,55 @@ body:has(#post) .pagination-post .next_info {
   text-underline-offset: 5px;
 }
 
-/* 文章底部“上一篇 / 下一篇”改成浅棕色 */
 .pagination-post .cover {
   background: #e69a43 !important;
+}
+
+/* 友链页：给下方评论区留出位置 */
+.link-page {
+  min-height: 1020px;
+}
+
+/* 缩短上方区域后，保持植物和文字原来的视觉高度 */
+.link-page .simple-page-branch,
+.link-page .link-intro {
+  transform: translateY(-50px);
+}
+
+/* 评论区：居中，宽度约为原来蓝框 */
+body:has(.link-page) #post-comment {
+  box-sizing: border-box;
+  width: min(640px, calc(100% - 40px));
+  margin: 0 auto 50px !important;
+  padding: 0 !important;
+}
+
+@media (max-width: 700px) {
+  .link-page {
+    width: calc(100% - 32px);
+    min-height: auto;
+    padding: 70px 0 30px;
+    flex-direction: column;
+  }
+
+  .link-page .simple-page-branch {
+    height: 320px;
+    transform: none;
+  }
+
+  .link-page .link-intro {
+    flex: none;
+    width: 100%;
+    transform: none;
+  }
+
+  body:has(.link-page) #post-comment {
+    width: calc(100% - 32px);
+    margin: 20px auto 50px !important;
+  }
+}
+
+/* 只隐藏友链页评论区上方的剪刀分割线 */
+#page:has(.link-page) hr {
+  display: none;
 }
