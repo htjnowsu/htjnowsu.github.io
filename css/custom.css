@@ -440,24 +440,36 @@ body:has(#post) .pagination-post {
   box-shadow: none !important;
 }
 
-body:has(#post) .pagination-post .prev-post,
-body:has(#post) .pagination-post .next-post {
-  background: transparent !important;
-}
-
 body:has(#post) .pagination-post img {
   display: none !important;
 }
 
-body:has(#post) .pagination-post .prev_info,
-body:has(#post) .pagination-post .next_info {
-  font-size: 18px;
-  text-decoration: underline;
-  text-underline-offset: 5px;
-}
-
 .pagination-post .cover {
   background: #e69a43 !important;
+}
+
+/* 隐藏卡片下方的剪刀分割线 */
+#post > .pagination-post + hr.custom-hr {
+  display: none !important;
+}
+
+/* 手机端：缩小上一篇 / 下一篇 */
+@media (max-width: 700px) {
+  #post .pagination-post {
+    width: 72% !important;
+    max-width: 260px;
+    margin: 40px auto 0 !important;
+  }
+
+  #post .pagination-post .pagination-related {
+    height: 72px !important;
+  }
+
+  #post .pagination-post .pagination-related .info .info-1,
+  #post .pagination-post .pagination-related .info .info-2 {
+    padding: 8px 16px;
+    font-size: 12px;
+  }
 }
 
 /* 友链页：给下方评论区留出位置 */
@@ -517,7 +529,7 @@ body:has(.link-page) #post-comment {
   }
 
   #page-header.full_page .home-collage {
-    width: calc(100vw - 12px);
+    width: calc(105vw - 12px);
   }
 
   /* 三页统一：页面比屏幕窄 12px */
@@ -551,8 +563,8 @@ body:has(.link-page) #post-comment {
     padding: 0;
     flex-direction: row;
     flex-wrap: nowrap;
-    zoom: 38%;
-    transform: translate(-50px, 0px);
+    zoom: 45%;
+    transform: translate(-60px, 0px);
   }
 
   /* 友链：上方植物和文字作为一组调整 */
@@ -562,7 +574,7 @@ body:has(.link-page) #post-comment {
     padding: 0;
     flex-direction: row;
     flex-wrap: nowrap;
-    zoom: 38%;
+    zoom: 50%;
     transform: translate(70px, 0px);
   }
 
@@ -616,5 +628,48 @@ body:has(.link-page) #post-comment {
 
   #nav .menus_item .site-page i {
     display: none !important;
+  }
+}
+
+/* 手机端：生活分类和“所有文章”列表 */
+@media (max-width: 700px) {
+  body:has(:is(#category, #archive)) .layout > div:first-child {
+    width: 100% !important;
+  }
+
+  body:has(:is(#category, #archive)) :is(#category, #archive) {
+    width: 100% !important;
+    box-sizing: border-box;
+    padding: 20px 60px !important;
+  }
+
+  body:has(:is(#category, #archive)) .article-sort-item.year {
+    font-size: 19px !important;
+    margin-bottom: 12px !important;
+  }
+
+  body:has(:is(#category, #archive)) .article-sort-item-title {
+    font-size: 16px !important;
+    line-height: 1.5;
+  }
+
+    /* 手机端：文章正文 */
+  body:has(#post) #article-container {
+    font-size: 16px !important;
+    line-height: 1.8;
+  }
+
+}
+
+@media (max-width: 700px) {
+  body {
+    background-image: var(--paper-image) !important;
+    background-position: center top !important;
+    background-size: cover !important;
+    background-attachment: scroll !important;
+  }
+
+  #page-header.full_page {
+    background-attachment: scroll !important;
   }
 }
