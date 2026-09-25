@@ -665,9 +665,10 @@ body:has(.link-page) #post-comment {
   body {
     background-image: var(--paper-image) !important;
     background-position: center top !important;
-    background-size: cover !important;
+    background-size: auto 100vh !important;
+    background-repeat: repeat-y !important;
     background-attachment: scroll !important;
-  }
+}
 
   #page-header.full_page {
     background-attachment: scroll !important;
