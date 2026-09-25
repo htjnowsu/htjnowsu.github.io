@@ -428,8 +428,7 @@ body:has(#post) .post-copyright,
 body:has(#post) .tag_share,
 body:has(#post) .post-reward,
 body:has(#post) .relatedPosts,
-body:has(#post) .post-outdate-notice,
-body:has(#post) #post-comment {
+body:has(#post) .post-outdate-notice {
   display: none !important;
 }
 
@@ -686,5 +685,86 @@ body:has(.link-page) #post-comment {
     background-position: center top !important;
     background-attachment: scroll !important;
   }
+}
+
+body:has(#post) #post-comment {
+  margin-top: 80px !important;
+}
+
+/* 只恢复文章页的标题和日期 */
+body:has(#post) #page-header.post-bg {
+  height: auto !important;
+}
+
+body:has(#post) #post-info {
+  position: static !important;
+  box-sizing: border-box;
+  width: min(760px, 100%) !important;
+  margin: 0 auto !important;
+  padding: 75px 30px 20px !important;
+}
+
+body:has(#post) #post-info .post-title,
+body:has(#post) #post-meta {
+  margin: 0 !important;
+  padding: 0 !important;
+  color: var(--ink) !important;
+  text-shadow: none !important;
+}
+
+body:has(#post) #post-info .post-title {
+  font-size: 35px !important;
+    margin-bottom: 16px !important;
+}
+
+body:has(#post) #post-meta a {
+  color: var(--ink) !important;
+}
+
+/* 文章日期：把画面上的“发表于”改成“写于” */
+body:has(#post) #post-info .post-meta-date > .post-meta-label:first-of-type {
+  font-size: 0 !important;
+}
+
+body:has(#post) #post-info .post-meta-date > .post-meta-label:first-of-type::after {
+  content: "写于";
+  font-size: 13px;
+}
+
+/* 隐藏文章标题下方的浏览量一行 */
+body:has(#post) #post-meta .meta-secondline {
+  display: none !important;
+}
+
+/* 文章标题：粗体黑色 */
+body:has(#post) #post-info .post-title {
+  color: #222 !important;
+  font-weight: 700 !important;
+}
+
+/* “写于”所在的一整行：灰色 */
+body:has(#post) #post-info #post-meta,
+body:has(#post) #post-info #post-meta a {
+  color: #888 !important;
+}
+
+/* 只保留“写于”日期，隐藏后面的“更新于” */
+body:has(#post) #post-info .post-meta-date-created ~ * {
+  display: none !important;
+}
+
+/* 文章标题和写作时间一起往下移 */
+body:has(#post) #page-header #post-info {
+  padding-top: 200px !important;
+}
+
+/* 上一篇／下一篇：悬停时仍显示标题，不切换成正文 */
+body:has(#post) .pagination-post .pagination-related .info-1 {
+  opacity: 1 !important;
+  transform: translateY(-50%) !important;
+}
+
+body:has(#post) .pagination-post .pagination-related .info-2 {
+  display: none !important;
 }
 
