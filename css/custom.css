@@ -679,3 +679,12 @@ body:has(.link-page) #post-comment {
   margin-bottom: 2em !important;
 }
 
+@media (max-width: 700px) {
+  body:has(#post) {
+    background-size: auto 100vh !important;
+    background-repeat: repeat-y !important;
+    background-position: center top !important;
+    background-attachment: scroll !important;
+  }
+}
+
