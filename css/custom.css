@@ -182,41 +182,6 @@ body:not(:has(#page-header.full_page)) #blog_name a {
   to   { opacity: 1; }
 }
 
-/* 窄屏重新排布素材，避免桌面拼贴缩成一小块。 */
-@media (max-width: 700px) {
-  #page-header.full_page .home-collage {
-    top: calc(50% + 30px);
-    width: 100vw;
-    height: calc(100vh - 60px);
-    aspect-ratio: auto;
-  }
-
-  #page-header.full_page .home-collage .home-poem {
-    left: 3%; top: 1%; width: 94%;
-  }
-  #page-header.full_page .home-collage .home-paper {
-    left: 50%; top: 51%; width: 43%; height: 27%;
-  }
-  #page-header.full_page .home-collage .home-book {
-    left: 4%; top: 76%; width: 42%;
-  }
-  #page-header.full_page .home-collage .home-book-quote {
-    left: 23%; top: 72%; width: 30%;
-  }
-  #page-header.full_page .home-collage .home-upper-quote {
-    left: 49%; top: 53%; width: 25%;
-  }
-  #page-header.full_page .home-collage .home-portrait {
-    left: 69%; top: 47%; width: 28%;
-  }
-  #page-header.full_page .home-collage .home-branch {
-    left: 48%; top: 60%; width: 33%;
-  }
-  #page-header.full_page .home-collage .home-sticker {
-    left: 61%; top: 82%; width: 34%;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   #page-header.full_page .home-collage img {
     animation: none;
@@ -542,4 +507,114 @@ body:has(.link-page) #post-comment {
 /* 只隐藏友链页评论区上方的剪刀分割线 */
 #page:has(.link-page) hr {
   display: none;
+}
+
+/* ========== 手机端：保留电脑版构图，整组缩小 ========== */
+@media (max-width: 700px) {
+  /* 首页：沿用电脑版每张图的位置和比例 */
+  #page-header.full_page {
+    height: 100svh !important;
+  }
+
+  #page-header.full_page .home-collage {
+    width: calc(100vw - 12px);
+  }
+
+  /* 三页统一：页面比屏幕窄 12px */
+  body:has(.archive-menu-wrap) #page,
+  body:has(.about-page) #page,
+  body:has(.link-page) #page {
+  width: calc(100vw - 12px) !important;
+  margin: 0 auto !important;
+}
+
+  /* 归档和关于：内容在页面中居中 */
+  body:has(.archive-menu-wrap) #page,
+  body:has(.about-page) #page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100svh - 60px);
+}
+ 
+  /* 归档：植物和菜单一起缩小，保留向左移动 */
+  .archive-menu-wrap {
+    width: max-content;
+    min-height: 0;
+    transform: translateX(-65px);
+    zoom: 45%;
+  }
+    /* 关于：植物和文字作为一组调整 */
+  .about-page {
+    width: max-content;
+    min-height: 0;
+    padding: 0;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    zoom: 38%;
+    transform: translate(-50px, 0px);
+  }
+
+  /* 友链：上方植物和文字作为一组调整 */
+  .link-page {
+    width: max-content;
+    min-height: 1020px;
+    padding: 0;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    zoom: 38%;
+    transform: translate(70px, 0px);
+  }
+
+  /* 保留友链植物和文字原有的位置关系 */
+  .link-page .simple-page-branch,
+  .link-page .link-intro {
+    transform: translateY(-50px);
+  }
+
+  /* 友链评论区 */
+  body:has(.link-page) #article-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  body:has(.link-page) #post-comment {
+    width: min(640px, calc(100% - 40px));
+    margin: 0px auto 50px !important;
+  }
+}
+
+@media (max-width: 700px) {
+  #nav #menus,
+  #nav .menus_items {
+    display: flex !important;
+    align-items: center;
+  }
+
+  #nav #menus {
+    margin-left: auto;
+  }
+
+  #page-header #nav #menus #toggle-menu {
+  display: none !important;
+  width: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  pointer-events: none !important;
+}
+
+  #sidebar {
+  display: none !important;
+}
+
+  #nav .menus_item .site-page {
+    padding: 8px 4px !important;
+    font-size: 13px !important;
+    white-space: nowrap;
+  }
+
+  #nav .menus_item .site-page i {
+    display: none !important;
+  }
 }
