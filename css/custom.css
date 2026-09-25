@@ -553,7 +553,7 @@ body:has(.link-page) #post-comment {
   .archive-menu-wrap {
     width: max-content;
     min-height: 0;
-    transform: translateX(-65px);
+    transform: translateX(-75px);
     zoom: 45%;
   }
     /* 关于：植物和文字作为一组调整 */
@@ -574,7 +574,7 @@ body:has(.link-page) #post-comment {
     padding: 0;
     flex-direction: row;
     flex-wrap: nowrap;
-    zoom: 50%;
+    zoom: 55%;
     transform: translate(70px, 0px);
   }
 
@@ -673,3 +673,8 @@ body:has(.link-page) #post-comment {
     background-attachment: scroll !important;
   }
 }
+
+#post #article-container p {
+  margin-bottom: 2em !important;
+}
+
